@@ -1,10 +1,8 @@
 import express from 'express';
 import open from 'open';
 
-async function quicklaunch(options = {}) {
+async function quicklaunch(app, options = {}) {
   const { port = 3000 } = options; // Default to port 3000 if not specified
-
-  const app = express();
 
   app.get("/", (req, res) => {
     res.json("Welcome to the football API");
