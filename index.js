@@ -1,4 +1,5 @@
-import  express  from 'express';
+import express from 'express';
+import open from 'open';
 
 async function quicklaunch(options = {}) {
   const { port = 3000 } = options; // Default to port 3000 if not specified
@@ -13,8 +14,7 @@ async function quicklaunch(options = {}) {
     console.log(`Listening on http://localhost:${port}`);
 
     try {
-      const open = await import('open');
-      await open.default(`http://localhost:${port}`, { wait: false });
+      await open(`http://localhost:${port}`, { wait: false });
       console.log('Web browser opened.');
     } catch (err) {
       console.error(`Error opening web browser: ${err}`);
@@ -22,4 +22,4 @@ async function quicklaunch(options = {}) {
   });
 }
 
-module.exports = quicklaunch;
+export default quicklaunch;
