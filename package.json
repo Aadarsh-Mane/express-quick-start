@@ -2,6 +2,7 @@
   "name": "express-quick-setup",
   "version": "1.0.1",
   "main": "index.js",
+  "type":"module",
   "scripts": {
     "start": "node index.js"
   },

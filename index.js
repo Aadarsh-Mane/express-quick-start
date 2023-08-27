@@ -1,7 +1,6 @@
-const express = require('express');
-const open = require('open');
+import  express  from 'express';
 
-function quicklaunch(options = {}) {
+async function quicklaunch(options = {}) {
   const { port = 3000 } = options; // Default to port 3000 if not specified
 
   const app = express();
@@ -10,15 +9,16 @@ function quicklaunch(options = {}) {
     res.json("Welcome to the football API");
   });
 
-  app.listen(port, () => {
+  app.listen(port, async () => {
     console.log(`Listening on http://localhost:${port}`);
-    open(`http://localhost:${port}`, { wait: false })
-      .then(() => {
-        console.log('Web browser opened.');
-      })
-      .catch((err) => {
-        console.error(`Error opening web browser: ${err}`);
-      });
+
+    try {
+      const open = await import('open');
+      await open.default(`http://localhost:${port}`, { wait: false });
+      console.log('Web browser opened.');
+    } catch (err) {
+      console.error(`Error opening web browser: ${err}`);
+    }
   });
 }
 
